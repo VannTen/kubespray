@@ -1,0 +1,15 @@
+---
+_kubeadm_images:
+  kube_control_plane:
+    - kube-apiserver
+    - kube-scheduler
+    - kube-controller-manager
+  k8s_cluster:
+    - kube-proxy
+  etcd:
+    - etcd
+_query: '[*].{"key": [1], "value": [0].key}'
+# Revert the _kubeadm_dict to map image to node groups where it's needed
+kubeadm_image_group: "{{ _kubeadm_images
+  | dict2items | subelements('value') | map('flatten')
+  | json_query(_query) | items2dict }}"
