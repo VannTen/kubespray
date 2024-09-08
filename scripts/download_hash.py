@@ -30,6 +30,11 @@ def open_checksums_yaml():
 def version_compare(version):
     return Version(version.removeprefix("v"))
 
+arch_alt_name = {
+    "amd64": "x86_64",
+    "arm64": "aarch64",
+}
+
 downloads = {
     "calicoctl_binary": "https://github.com/projectcalico/calico/releases/download/{version}/SHA256SUMS",
     "ciliumcli_binary": "https://github.com/cilium/cilium-cli/releases/download/{version}/cilium-{os}-{arch}.tar.gz.sha256sum",
@@ -151,7 +156,8 @@ def download_hash(only_downloads: [str]) -> None:
                         hash_file = s.get(downloads[download].format(
                             version = version,
                             os = "linux",
-                            arch = arch
+                            arch = arch,
+                            alt_arch = arch_alt_name[arch],
                             ),
                          allow_redirects=True)
                         if hash_file.status_code == 404:
