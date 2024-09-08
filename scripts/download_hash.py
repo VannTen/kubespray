@@ -43,6 +43,8 @@ downloads = {
     "crictl": "https://github.com/kubernetes-sigs/cri-tools/releases/download/{version}/critest-{version}-{os}-{arch}.tar.gz.sha256",
     "crio_archive": "https://storage.googleapis.com/cri-o/artifacts/cri-o.{arch}.{version}.tar.gz.sha256sum",
     "etcd_binary": "https://github.com/etcd-io/etcd/releases/download/{version}/SHA256SUMS",
+    "gvisor_containerd_shim_binary": "https://storage.googleapis.com/gvisor/releases/release/{version}/{alt_arch}/containerd-shim-runsc-v1.sha512",
+    "gvisor_runsc_binary": "https://storage.googleapis.com/gvisor/releases/release/{version}/{alt_arch}/runsc.sha512",
     "kubeadm": "https://dl.k8s.io/release/{version}/bin/linux/{arch}/kubeadm.sha256",
     "kubectl": "https://dl.k8s.io/release/{version}/bin/linux/{arch}/kubectl.sha256",
     "kubelet": "https://dl.k8s.io/release/{version}/bin/linux/{arch}/kubelet.sha256",
@@ -54,7 +56,6 @@ downloads = {
 # TODO: downloads not supported
 # youki: no checkusms in releases
 # kata: no checksums in releases
-# gvisor: sha512 checksums
 # crun : PGP signatures
 # cri_dockerd: no checksums or signatures
 # helm_archive: PGP signatures
