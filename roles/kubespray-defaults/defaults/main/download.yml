@@ -1183,7 +1183,7 @@ downloads:
     file: true
     version: "{{ yq_version }}"
     dest: "{{ local_release_dir }}/yq-{{ yq_version }}-{{ image_arch }}"
-    checksum: "{{ yq_binary_checksum | default(None) }}"
+    checksum: "{{ yq_binary_checksum }}"
     url: "{{ yq_download_url }}"
     unarchive: false
     owner: "root"
