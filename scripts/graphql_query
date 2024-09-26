@@ -1,0 +1,30 @@
+gh api graphql -f query='query {
+  with_releases: nodes(ids:["R_kgDOAr9FWA","R_kgDOBQqEpg"]) {
+
+    ... on Repository {
+      nameWithOwner
+      releases(first: 20) {
+        nodes {
+          tagName
+          isPrerelease
+        }
+      }
+    }
+  }
+
+  with_tags: nodes(ids:["R_kgDOB9IlXg"]) {
+
+    ... on Repository {
+      nameWithOwner
+      refs(refPrefix: "refs/tags/", first: 20) {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+  rateLimit {
+      cost
+      remaining
+  }
+}'

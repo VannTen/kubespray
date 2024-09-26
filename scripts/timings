@@ -1,0 +1,26 @@
+# Start
+$ time python download_hash.py
+
+...
+
+real	2m24.417s
+user	0m2.245s
+sys	0m0.290s
+
+# Reusing session
+$ time python download_hash.py
+
+...
+
+real	1m41.749s
+user	0m1.068s
+sys	0m0.088s
+
+real	1m26.888s
+user	0m0.827s
+sys	0m0.058s
+shell:
+
+real	14m32.278s
+user	0m41.258s
+sys	0m29.733s
