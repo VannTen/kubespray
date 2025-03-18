@@ -1,0 +1,38 @@
+name: Upgrade Kubespray components with new patches versions
+
+on:
+  schedule:
+  - cron: '22 2 * * *' # every day, 02:22 UTC
+  workflow_dispatch:
+
+jobs:
+  update-patch-versions:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+        cache: 'pip'
+    - run: pip install scripts/component_hash_update pre-commit
+    - run: update-hashes
+      env:
+        API_KEY: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/cache@v4
+      with:
+        key: pre-commit-hook-propagate
+        path: |
+          ~/.cache/pre-commit
+    - run: pre-commit run --all-files propagate-ansible-variables
+      continue-on-error: true
+    - uses: peter-evans/create-pull-request@v7
+      with:
+        commit-message: Patch versions updates
+        title: Patch versions updates
+        labels: bot
+        body: |
+          /kind feature
+
+          ```release-note
+          NONE
+          ```
